@@ -3,6 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W975ZXDC');</script>
+<!-- End Google Tag Manager -->
+
+<!-- agenci.io external tracking -->
+<script src="https://app.elieaouad.com/js/external-tracking.js" data-tracking-id="tk_021cbff5e7f9477ca8f26ac0c920153c"></script>
+
 <title>Elie Aouad Consultancy — Move capital into a USD-pegged Dubai asset</title>
 <meta name="description" content="Move capital trapped in a weak currency into a USD-pegged Dubai asset — in as little as one day. One accountable advisor, two or three vetted opportunities, and a roadmap built around your capital.">
 
@@ -32,6 +44,10 @@
 </head>
 
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W975ZXDC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <div>
 
   <!-- Announcement bar -->
@@ -156,27 +172,17 @@
 
   <!-- Booking modal -->
   <div id="bookingModal" class="modal" onclick="backdropClick(event)">
-    <div style="background:#fff;color:#16191c;width:100%;max-width:430px;border-radius:28px;padding:30px 26px 26px;position:relative">
+    <div style="background:#fff;color:#16191c;width:100%;max-width:520px;border-radius:28px;padding:30px 26px 26px;position:relative;max-height:92vh;overflow-y:auto">
       <button type="button" onclick="closeModal()" aria-label="Close" style="position:absolute;top:14px;right:16px;width:32px;height:32px;border:none;border-radius:50%;background:#f4f3ef;font-size:18px;line-height:1;cursor:pointer;color:#7a807f">×</button>
       <h3 style="font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.2;margin:0 0 10px">Book your strategy call</h3>
       <p style="font-size:15px;line-height:1.55;color:#5d6366;margin:0 0 20px">Free, 30 minutes, no obligation. You'll get a roadmap built around your capital, your goals and your risk tolerance.</p>
 
-      <!-- ============================================================= -->
-      <!-- EMBED YOUR FORM HERE (agenci.io / Typeform / etc.)            -->
-      <!-- To use an external form instead of the native one below:     -->
-      <!--   1. Delete the whole <form>...</form> block below.          -->
-      <!--   2. Paste your form's embed <script> or <iframe> right here.-->
-      <!--   3. In that tool, set the "redirect after submit" URL to    -->
-      <!--      book.html  (the calendar step).                         -->
-      <!-- The native form below is a working fallback until you do.    -->
-      <!-- ============================================================= -->
-      <form onsubmit="return submitForm(event)" style="display:flex;flex-direction:column;gap:10px">
-        <input type="text" name="first_name" placeholder="First name" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
-        <input type="tel" name="phone" placeholder="Phone number" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
-        <input type="email" name="email" placeholder="Email address" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
-        <input type="text" name="instagram" placeholder="Instagram handle" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
-        <button type="submit" class="cta-green" style="height:56px;border:none;border-radius:999px;background:#14634f;color:#fff;font-family:inherit;font-size:17px;font-weight:600;cursor:pointer;margin-top:6px">Book my call</button>
-      </form>
+      <!-- agenci.io survey embed. To send people to the calendar after they
+           finish, set THIS survey's on-submit redirect (in agenci) to:
+             https://elieaouad.com/book.html
+           and choose the option to redirect the whole page / parent window. -->
+      <iframe src="https://app.elieaouad.com/widget/survey/6GpJXKQR5o8pYMzwfxq9" style="border:none;width:100%;" scrolling="no" id="6GpJXKQR5o8pYMzwfxq9" title="survey"></iframe>
+      <script src="https://app.elieaouad.com/js/form_embed.js"></script>
     </div>
   </div>
 
@@ -225,18 +231,6 @@
   function backdropClick(e){ if (e.target === e.currentTarget) closeModal(); }
 
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
-
-  function submitForm(e){
-    e.preventDefault();
-    var data = Object.fromEntries(new FormData(e.target).entries());
-    // Save the lead so the calendar / thank-you steps can greet by name.
-    try { sessionStorage.setItem('eac_lead', JSON.stringify(data)); } catch (_) {}
-    // Native-form fallback: advance to the calendar step.
-    // (If you embed an external form above, configure THAT tool to redirect to
-    // book.html on submit — this handler won't run in that case.)
-    window.location.href = 'book.html';
-    return false;
-  }
 </script>
 </body>
 </html>
