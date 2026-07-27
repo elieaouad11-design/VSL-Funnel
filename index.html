@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elie Aouad Consultancy — Move capital into a USD-pegged Dubai asset</title>
+<meta name="description" content="Move capital trapped in a weak currency into a USD-pegged Dubai asset — in as little as one day. One accountable advisor, two or three vetted opportunities, and a roadmap built around your capital.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f2f1ec;color:#16191c;-webkit-font-smoothing:antialiased;font-family:'Instrument Sans',Helvetica,Arial,sans-serif}
+  a{color:#14634f}
+  a:hover{color:#0d4436}
+
+  @keyframes softPulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+  /* Button hover states (translated from the design's style-hover attributes) */
+  .cta-mint{transition:transform .15s ease,background .15s ease}
+  .cta-mint:hover{background:#96e2c6;transform:translateY(-2px)}
+  .cta-green{transition:background .15s ease}
+  .cta-green:hover{background:#0d4436}
+
+  /* Booking modal */
+  .modal{position:fixed;inset:0;background:rgba(14,17,19,.6);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px}
+  .modal.open{display:flex}
+  .modal input:focus{border-color:#14634f}
+</style>
+</head>
+
+<body>
+<div>
+
+  <!-- Announcement bar -->
+  <div style="padding:14px 16px 0">
+    <div style="max-width:1140px;margin:0 auto;background:#e4ece7;color:#0d4436;border-radius:999px;padding:11px 22px;font-size:13.5px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;text-align:center">
+      <span style="width:7px;height:7px;border-radius:50%;background:#14634f;display:inline-block;animation:softPulse 1.8s ease-in-out infinite"></span>
+      Free training · Strategy calls this month are limited to 12 investors
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section style="padding:16px 16px 0">
+    <div style="max-width:1140px;margin:0 auto;background:#14181b;color:#f6f5f1;border-radius:34px;padding:clamp(30px,5vw,64px) clamp(20px,4vw,56px) clamp(34px,5vw,56px);position:relative;overflow:hidden">
+      <div style="position:absolute;top:-160px;right:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,#1f5c4d 0%,rgba(20,24,27,0) 70%);opacity:.75"></div>
+      <div style="position:relative;text-align:center">
+        <div style="display:inline-flex;align-items:center;gap:10px;background:#20262a;border:1px solid #2e363b;border-radius:999px;padding:8px 18px;margin-bottom:26px">
+          <span style="width:6px;height:6px;border-radius:50%;background:#5ec2a4;display:inline-block"></span>
+          <span style="font-size:13px;font-weight:600;letter-spacing:.02em;color:#cfd4d3">Elie Aouad Consultancy · Dubai</span>
+        </div>
+        <h1 style="font-size:clamp(31px,5.2vw,58px);font-weight:600;line-height:1.08;letter-spacing:-.03em;margin:0 auto 20px;max-width:940px;text-wrap:balance">Move capital trapped in a weak currency into a <span style="color:#7fd6b6">USD-pegged Dubai asset</span> — in as little as one day</h1>
+        <p style="font-size:clamp(16px,2.1vw,20px);line-height:1.6;color:#a8afb2;max-width:660px;margin:0 auto 34px;text-wrap:pretty">Without the developer-event circus that keeps you stuck. One accountable advisor, two or three vetted opportunities, and a roadmap built around your capital — from first call to signed contract.</p>
+
+        <div style="max-width:860px;margin:0 auto;background:#1b2125;border-radius:26px;padding:12px">
+          <div style="aspect-ratio:16/9;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background-color:#232a2e;background-image:repeating-linear-gradient(135deg,#283136 0 10px,#232a2e 10px 20px)">
+            <span style="width:78px;height:78px;border-radius:50%;background:#14634f;color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px">▶</span>
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;letter-spacing:.08em;color:#7e8688;text-transform:uppercase">VSL — drop training video here</span>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:32px">
+          <button type="button" onclick="openModal()" class="cta-mint" style="font-size:clamp(16px,2vw,19px);font-weight:600;letter-spacing:-.01em;color:#0c1a16;background:#7fd6b6;border:none;border-radius:999px;padding:19px 40px;cursor:pointer;line-height:1.2;box-shadow:0 12px 30px -14px rgba(127,214,182,.9)">Book your strategy call</button>
+          <p style="font-size:13px;color:#8b9294;margin:0">Free · 30 minutes · No obligation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section style="padding:16px">
+    <div style="max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px">
+      <div style="background:#fff;border-radius:24px;padding:26px 24px">
+        <div style="font-size:34px;font-weight:600;letter-spacing:-.03em;color:#14634f">750K</div>
+        <div style="font-size:14.5px;line-height:1.5;color:#5d6366;margin-top:6px">AED profit for one client in under two years</div>
+      </div>
+      <div style="background:#fff;border-radius:24px;padding:26px 24px">
+        <div style="font-size:34px;font-weight:600;letter-spacing:-.03em;color:#14634f">6%</div>
+        <div style="font-size:14.5px;line-height:1.5;color:#5d6366;margin-top:6px">Net annual yield for a first-time investor</div>
+      </div>
+      <div style="background:#fff;border-radius:24px;padding:26px 24px">
+        <div style="font-size:34px;font-weight:600;letter-spacing:-.03em;color:#14634f">2–3</div>
+        <div style="font-size:14.5px;line-height:1.5;color:#5d6366;margin-top:6px">Vetted opportunities per client, never ten</div>
+      </div>
+      <div style="background:#fff;border-radius:24px;padding:26px 24px">
+        <div style="font-size:34px;font-weight:600;letter-spacing:-.03em;color:#14634f">1 day</div>
+        <div style="font-size:14.5px;line-height:1.5;color:#5d6366;margin-top:6px">To build a roadmap around your situation</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Authority -->
+  <section style="padding:16px">
+    <div style="max-width:1140px;margin:0 auto;background:#fff;border-radius:34px;padding:clamp(26px,4vw,52px)">
+      <div style="display:flex;flex-wrap:wrap;gap:clamp(26px,4vw,52px);align-items:center">
+        <div style="flex:0 0 300px;max-width:100%">
+          <div style="aspect-ratio:4/5;border-radius:26px;overflow:hidden;display:flex;align-items:flex-end;justify-content:center;padding:18px;background-color:#e9e7e1;background-image:repeating-linear-gradient(135deg,#e0ddd6 0 10px,#e9e7e1 10px 20px)">
+            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;letter-spacing:.06em;color:#8b8880;text-transform:uppercase;background:#fff;padding:6px 12px;border-radius:999px">Portrait of Elie</span>
+          </div>
+        </div>
+        <div style="flex:1;min-width:290px">
+          <span style="display:inline-block;background:#e4ece7;color:#0d4436;border-radius:999px;padding:7px 15px;font-size:13px;font-weight:600;margin-bottom:18px">Who is Elie?</span>
+          <h2 style="font-size:clamp(24px,3.4vw,36px);font-weight:600;line-height:1.15;letter-spacing:-.025em;margin:0 0 18px;text-wrap:balance">One accountable advisor — from first call to keys in hand</h2>
+          <p style="font-size:17px;line-height:1.7;color:#4c5255;margin:0 0 16px;text-wrap:pretty">I've guided investors through the full journey: off-plan purchase, handover, resale. One client walked away with 750,000 AED profit in under two years, and we reinvested the whole amount into a bigger opportunity the same month the sale closed.</p>
+          <p style="font-size:17px;line-height:1.7;color:#4c5255;margin:0 0 24px;text-wrap:pretty">I don't hide behind a slow developer or a bad cycle. I own the outcome with you.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:9px;margin-bottom:26px">
+            <span style="background:#f4f3ef;border-radius:999px;padding:9px 16px;font-size:14px;font-weight:500;color:#3f4548">Off-plan sourcing &amp; negotiation</span>
+            <span style="background:#f4f3ef;border-radius:999px;padding:9px 16px;font-size:14px;font-weight:500;color:#3f4548">Payment plans built around you</span>
+            <span style="background:#f4f3ef;border-radius:999px;padding:9px 16px;font-size:14px;font-weight:500;color:#3f4548">Handover, rental &amp; exit</span>
+            <span style="background:#f4f3ef;border-radius:999px;padding:9px 16px;font-size:14px;font-weight:500;color:#3f4548">Risks on the table first</span>
+          </div>
+          <div style="background:#f4f3ef;border-radius:22px;padding:22px 24px;font-size:17px;line-height:1.6;color:#16191c;margin-bottom:26px">“You never have to trust the market. You only have to trust one person — and that person owns the outcome with you.”</div>
+          <div style="display:flex;flex-wrap:wrap;align-items:center;gap:16px">
+            <button type="button" onclick="openModal()" class="cta-green" style="font-size:17px;font-weight:600;color:#fff;background:#14634f;border:none;border-radius:999px;padding:18px 34px;cursor:pointer;line-height:1.2">Book your strategy call</button>
+            <span style="font-size:13.5px;color:#7a807f">Free · 30 minutes · No obligation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Success stories -->
+  <section style="padding:26px 16px 16px">
+    <div style="max-width:1140px;margin:0 auto">
+      <div style="text-align:center;max-width:640px;margin:0 auto 26px">
+        <span style="display:inline-block;background:#e4ece7;color:#0d4436;border-radius:999px;padding:7px 15px;font-size:13px;font-weight:600;margin-bottom:16px">Client outcomes</span>
+        <h2 style="font-size:clamp(25px,3.8vw,40px);font-weight:600;line-height:1.12;letter-spacing:-.028em;margin:0;text-wrap:balance">Investors who moved their capital, in their own words</h2>
+      </div>
+      <div id="stories" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px"></div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section style="padding:16px">
+    <div style="max-width:1140px;margin:0 auto;background:#14181b;color:#f6f5f1;border-radius:34px;padding:clamp(36px,5vw,64px) clamp(22px,4vw,56px);text-align:center;position:relative;overflow:hidden">
+      <div style="position:absolute;bottom:-180px;left:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,#1f5c4d 0%,rgba(20,24,27,0) 70%);opacity:.7"></div>
+      <div style="position:relative;max-width:720px;margin:0 auto">
+        <h2 style="font-size:clamp(27px,4.2vw,44px);font-weight:600;line-height:1.1;letter-spacing:-.03em;margin:0 0 18px;text-wrap:balance">Here's what to do next</h2>
+        <p style="font-size:clamp(16px,2vw,19px);line-height:1.62;color:#a8afb2;margin:0 0 30px;text-wrap:pretty">Book the free 30-minute call. We'll look at your capital, your goals and your risk tolerance — you'll leave with a roadmap and two or three vetted opportunities, not ten confusing ones.</p>
+        <button type="button" onclick="openModal()" class="cta-mint" style="font-size:clamp(16px,2vw,19px);font-weight:600;color:#0c1a16;background:#7fd6b6;border:none;border-radius:999px;padding:20px 42px;cursor:pointer;line-height:1.2;box-shadow:0 12px 30px -14px rgba(127,214,182,.9)">Book your strategy call</button>
+        <p style="font-size:13px;color:#8b9294;margin:16px 0 0">12 slots this month · No obligation</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer style="padding:22px 16px 40px">
+    <div style="max-width:1140px;margin:0 auto;text-align:center;color:#83898b">
+      <p style="font-size:14px;font-weight:600;color:#16191c;margin:0 0 10px">Elie Aouad Consultancy</p>
+      <p style="font-size:13px;margin:0 0 14px">© 2026 Elie Aouad Consultancy. All rights reserved.</p>
+      <p style="font-size:11.5px;line-height:1.7;margin:0 auto;max-width:760px;opacity:.85;text-wrap:pretty">Results shown are individual client outcomes and are not typical or guaranteed. Real estate involves risk, including the risk of loss, and past performance does not predict future results. Nothing on this page is financial, legal, or tax advice. Do your own due diligence and consult a licensed professional before making any investment decision.</p>
+    </div>
+  </footer>
+
+  <!-- Booking modal -->
+  <div id="bookingModal" class="modal" onclick="backdropClick(event)">
+    <div style="background:#fff;color:#16191c;width:100%;max-width:430px;border-radius:28px;padding:30px 26px 26px;position:relative">
+      <button type="button" onclick="closeModal()" aria-label="Close" style="position:absolute;top:14px;right:16px;width:32px;height:32px;border:none;border-radius:50%;background:#f4f3ef;font-size:18px;line-height:1;cursor:pointer;color:#7a807f">×</button>
+      <h3 style="font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.2;margin:0 0 10px">Book your strategy call</h3>
+      <p style="font-size:15px;line-height:1.55;color:#5d6366;margin:0 0 20px">Free, 30 minutes, no obligation. You'll get a roadmap built around your capital, your goals and your risk tolerance.</p>
+
+      <!-- ============================================================= -->
+      <!-- EMBED YOUR FORM HERE (agenci.io / Typeform / etc.)            -->
+      <!-- To use an external form instead of the native one below:     -->
+      <!--   1. Delete the whole <form>...</form> block below.          -->
+      <!--   2. Paste your form's embed <script> or <iframe> right here.-->
+      <!--   3. In that tool, set the "redirect after submit" URL to    -->
+      <!--      book.html  (the calendar step).                         -->
+      <!-- The native form below is a working fallback until you do.    -->
+      <!-- ============================================================= -->
+      <form onsubmit="return submitForm(event)" style="display:flex;flex-direction:column;gap:10px">
+        <input type="text" name="first_name" placeholder="First name" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
+        <input type="tel" name="phone" placeholder="Phone number" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
+        <input type="email" name="email" placeholder="Email address" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
+        <input type="text" name="instagram" placeholder="Instagram handle" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
+        <button type="submit" class="cta-green" style="height:56px;border:none;border-radius:999px;background:#14634f;color:#fff;font-family:inherit;font-size:17px;font-weight:600;cursor:pointer;margin-top:6px">Book my call</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // ---- Testimonials (from the design's `stories` array) ----
+  var stories = [
+    { quote: '“Elie guided the whole thing — off-plan buy through handover — and I resold at 750,000 AED profit in under two years.”', name: 'A.M.', initials: 'AM', role: 'Executive, off-plan investor' },
+    { quote: '“He negotiated the discount and structured a payment plan that fit me. Three years on, I’m holding a 6% net rental yield every year.”', name: 'First-time investor', initials: 'FI', role: 'Career professional abroad' },
+    { quote: '“I came in overpriced with no clear exit. Elie ran the unit as a short-term rental until we sold at the profit I needed.”', name: 'H.K.', initials: 'HK', role: 'Investor stuck in a bad deal' },
+    { quote: '“For the first time my money sits in a USD-backed asset instead of a currency I don’t trust.”', name: 'R.S.', initials: 'RS', role: 'Family capital holder' },
+    { quote: '“Two vetted opportunities instead of ten confusing ones. I made the decision in a single call.”', name: 'Managing director', initials: 'MD', role: 'Diaspora executive' },
+    { quote: '“Every risk was on the table before we ever talked upside, so I never second-guessed the choice.”', name: 'N.A.', initials: 'NA', role: 'First-time buyer' },
+    { quote: '“We reinvested my first exit into a larger opportunity the same month the sale closed.”', name: 'T.F.', initials: 'TF', role: 'Repeat investor' },
+    { quote: '“I finally stopped being the family member who talks and never acts. I actually own the unit now.”', name: 'Business owner', initials: 'BO', role: 'Growing family portfolio' },
+    { quote: '“Elie stayed with me from the first call until the keys were in my hand — no chasing a developer alone.”', name: 'S.D.', initials: 'SD', role: 'Senior executive' }
+  ];
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  (function renderStories(){
+    var html = stories.map(function(s){
+      return '<div style="background:#fff;border-radius:26px;padding:18px">'
+        + '<div style="position:relative;aspect-ratio:16/10;border-radius:18px;display:flex;align-items:center;justify-content:center;background-color:#e9e7e1;background-image:repeating-linear-gradient(135deg,#e0ddd6 0 10px,#e9e7e1 10px 20px)">'
+        + '<span style="width:48px;height:48px;border-radius:50%;background:#14634f;color:#fff;display:flex;align-items:center;justify-content:center;font-size:16px">▶</span>'
+        + '</div>'
+        + '<p style="font-size:16px;line-height:1.62;color:#3f4548;margin:16px 0 16px;text-wrap:pretty">' + esc(s.quote) + '</p>'
+        + '<div style="display:flex;align-items:center;gap:11px;border-top:1px solid #eeece7;padding-top:14px">'
+        + '<span style="width:34px;height:34px;border-radius:50%;background:#e4ece7;color:#0d4436;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;flex:none">' + esc(s.initials) + '</span>'
+        + '<span>'
+        + '<span style="display:block;font-size:14.5px;font-weight:600;color:#16191c">' + esc(s.name) + '</span>'
+        + '<span style="display:block;font-size:13px;color:#83898b">' + esc(s.role) + '</span>'
+        + '</span>'
+        + '</div>'
+        + '</div>';
+    }).join('');
+    document.getElementById('stories').innerHTML = html;
+  })();
+
+  // ---- Booking modal ----
+  var modal = document.getElementById('bookingModal');
+
+  function openModal(){ modal.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeModal(){ modal.classList.remove('open'); document.body.style.overflow = ''; }
+  function backdropClick(e){ if (e.target === e.currentTarget) closeModal(); }
+
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
+
+  function submitForm(e){
+    e.preventDefault();
+    var data = Object.fromEntries(new FormData(e.target).entries());
+    // Save the lead so the calendar / thank-you steps can greet by name.
+    try { sessionStorage.setItem('eac_lead', JSON.stringify(data)); } catch (_) {}
+    // Native-form fallback: advance to the calendar step.
+    // (If you embed an external form above, configure THAT tool to redirect to
+    // book.html on submit — this handler won't run in that case.)
+    window.location.href = 'book.html';
+    return false;
+  }
+</script>
+</body>
+</html>
