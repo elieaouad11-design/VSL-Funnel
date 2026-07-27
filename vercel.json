@@ -3,6 +3,7 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
-    { "source": "/book", "destination": "/calendar", "permanent": true }
+    { "source": "/calendar", "destination": "/thank-you", "permanent": false },
+    { "source": "/book", "destination": "/thank-you", "permanent": false }
   ]
 }
