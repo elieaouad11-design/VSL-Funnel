@@ -172,17 +172,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- Booking modal -->
   <div id="bookingModal" class="modal" onclick="backdropClick(event)">
-    <div style="background:#fff;color:#16191c;width:100%;max-width:520px;border-radius:28px;padding:30px 26px 26px;position:relative;max-height:92vh;overflow-y:auto">
+    <div style="background:#fff;color:#16191c;width:100%;max-width:430px;border-radius:28px;padding:30px 26px 26px;position:relative;max-height:92vh;overflow-y:auto">
       <button type="button" onclick="closeModal()" aria-label="Close" style="position:absolute;top:14px;right:16px;width:32px;height:32px;border:none;border-radius:50%;background:#f4f3ef;font-size:18px;line-height:1;cursor:pointer;color:#7a807f">×</button>
       <h3 style="font-size:22px;font-weight:600;letter-spacing:-.02em;line-height:1.2;margin:0 0 10px">Book your strategy call</h3>
-      <p style="font-size:15px;line-height:1.55;color:#5d6366;margin:0 0 20px">Free, 30 minutes, no obligation. You'll get a roadmap built around your capital, your goals and your risk tolerance.</p>
+      <p style="font-size:15px;line-height:1.55;color:#5d6366;margin:0 0 20px">Enter your details, then answer a few quick questions — Elie will call you personally.</p>
 
-      <!-- agenci.io survey embed. After opt-in, set THIS survey's on-submit
-           redirect (in agenci) to:
-             https://elieaouad.com/thank-you
-           and choose the option to redirect the whole page / parent window. -->
-      <iframe src="https://app.elieaouad.com/widget/survey/6GpJXKQR5o8pYMzwfxq9" style="border:none;width:100%;" scrolling="no" id="6GpJXKQR5o8pYMzwfxq9" title="survey"></iframe>
-      <script src="https://app.elieaouad.com/js/form_embed.js"></script>
+      <!-- Opt-in form: on submit it POSTs to the agenci.io webhook and carries
+           the details to /survey (via sessionStorage) so the survey pre-fills. -->
+      <form onsubmit="return submitOptin(event)" style="display:flex;flex-direction:column;gap:10px">
+        <input type="text" name="first_name" placeholder="First name" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
+        <input type="email" name="email" placeholder="Email address" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
+        <input type="tel" name="phone" placeholder="Phone number" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
+        <input type="text" name="instagram" placeholder="Instagram handle" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
+        <button type="submit" class="cta-green" style="height:56px;border:none;border-radius:999px;background:#14634f;color:#fff;font-family:inherit;font-size:17px;font-weight:600;cursor:pointer;margin-top:6px">Continue →</button>
+      </form>
     </div>
   </div>
 
@@ -231,6 +234,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function backdropClick(e){ if (e.target === e.currentTarget) closeModal(); }
 
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
+
+  // ---- Opt-in submit: send to agenci.io CRM + carry details to the survey ----
+  var WEBHOOK = 'https://services.leadconnectorhq.com/hooks/TCTH9Tc3gblq3h6sQHkA/webhook-trigger/5fea62c0-eea5-4ffc-9376-27c37caff180';
+
+  function submitOptin(e){
+    e.preventDefault();
+    var f = e.target;
+    var data = {
+      first_name: f.first_name.value.trim(),
+      email: f.email.value.trim(),
+      phone: f.phone.value.trim(),
+      instagram: f.instagram.value.trim()
+    };
+    // Carry details to the survey step via same-origin storage — keeps the
+    // values out of the page URL; the survey iframe gets them for prefill.
+    try { sessionStorage.setItem('eac_lead', JSON.stringify(data)); } catch (_) {}
+    // Fire the lead into agenci.io via inbound webhook. no-cors + keepalive so
+    // it isn't blocked by CORS and survives the navigation to /survey.
+    try {
+      fetch(WEBHOOK, {
+        method: 'POST',
+        mode: 'no-cors',
+        keepalive: true,
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+        body: JSON.stringify(Object.assign({ source: 'VSL opt-in popup', page: location.href }, data))
+      });
+    } catch (_) {}
+    window.location.href = '/survey';
+    return false;
+  }
 </script>
 </body>
 </html>
