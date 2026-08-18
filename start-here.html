@@ -71,9 +71,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p style="font-size:clamp(16px,2.1vw,20px);line-height:1.6;color:#a8afb2;max-width:660px;margin:0 auto 34px;text-wrap:pretty">Without the developer-event circus that keeps you stuck. One accountable advisor, two or three vetted opportunities, and a roadmap built around your capital — from first call to signed contract.</p>
 
         <div style="max-width:860px;margin:0 auto;background:#1b2125;border-radius:26px;padding:12px">
-          <div style="aspect-ratio:16/9;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background-color:#232a2e;background-image:repeating-linear-gradient(135deg,#283136 0 10px,#232a2e 10px 20px)">
-            <span style="width:78px;height:78px;border-radius:50%;background:#14634f;color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px">▶</span>
-            <span style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;letter-spacing:.08em;color:#7e8688;text-transform:uppercase">VSL — drop training video here</span>
+          <div id="vslWrap" style="position:relative;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#000;cursor:pointer">
+            <video id="vsl" playsinline muted autoplay preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#000">
+              <source src="https://assets.cdn.filesafe.space/TCTH9Tc3gblq3h6sQHkA/media/6a843eda96d2b224d3155d8c.mp4" type="video/mp4">
+            </video>
+            <!-- Tap-for-sound overlay (VSL autoplays muted, first tap unmutes) -->
+            <div id="vslUnmute" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(10,13,15,.34);color:#fff;text-align:center;transition:opacity .22s ease">
+              <span style="width:74px;height:74px;border-radius:50%;background:#7fd6b6;color:#0c1a16;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 12px 30px -12px rgba(127,214,182,.9)">🔊</span>
+              <span style="font-size:15px;font-weight:600;letter-spacing:.01em">Tap for sound</span>
+            </div>
           </div>
         </div>
 
@@ -234,6 +240,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function backdropClick(e){ if (e.target === e.currentTarget) closeModal(); }
 
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
+
+  // ---- VSL player: autoplay muted, tap for sound, GTM engagement events ----
+  (function () {
+    var v = document.getElementById('vsl');
+    var overlay = document.getElementById('vslUnmute');
+    if (!v) return;
+    var dl = (window.dataLayer = window.dataLayer || []);
+    var marks = { 25:false, 50:false, 75:false, 95:false };
+    function push(ev, extra){ try { dl.push(Object.assign({ event: ev }, extra || {})); } catch (_) {} }
+
+    // Belt-and-suspenders muted autoplay (in case the attribute is ignored)
+    var p = v.play && v.play();
+    if (p && p.catch) p.catch(function () { /* blocked; overlay tap will start it */ });
+
+    function unmute(){
+      v.muted = false;
+      v.volume = 1;
+      var pr = v.play();
+      if (pr && pr.catch) pr.catch(function () {});
+      v.controls = true; // hand over play/pause/seek/volume after first interaction
+      overlay.style.opacity = '0';
+      setTimeout(function () { overlay.style.display = 'none'; }, 240);
+      push('video_unmute');
+    }
+    overlay.addEventListener('click', unmute);
+
+    v.addEventListener('play', function () { push('video_play'); }, { once: true });
+    v.addEventListener('timeupdate', function () {
+      if (!v.duration) return;
+      var pct = (v.currentTime / v.duration) * 100;
+      [25, 50, 75, 95].forEach(function (m) {
+        if (!marks[m] && pct >= m) { marks[m] = true; push('video_progress', { video_percent: m }); }
+      });
+    });
+    v.addEventListener('ended', function () { push('video_complete'); });
+  })();
 
   // ---- Opt-in submit: send to agenci.io CRM + carry details to the survey ----
   var WEBHOOK = 'https://services.leadconnectorhq.com/hooks/TCTH9Tc3gblq3h6sQHkA/webhook-trigger/5fea62c0-eea5-4ffc-9376-27c37caff180';
