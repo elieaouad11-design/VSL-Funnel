@@ -29,6 +29,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   a:hover{color:#0d4436}
 
   @keyframes softPulse{0%,100%{opacity:1}50%{opacity:.3}}
+  @keyframes vslSpin{to{transform:rotate(360deg)}}
 
   /* Button hover states (translated from the design's style-hover attributes) */
   .cta-mint{transition:transform .15s ease,background .15s ease}
@@ -79,6 +80,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div id="vslUnmute" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:rgba(10,13,15,.34);color:#fff;text-align:center;transition:opacity .22s ease">
               <span style="width:74px;height:74px;border-radius:50%;background:#7fd6b6;color:#0c1a16;display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 12px 30px -12px rgba(127,214,182,.9)">🔊</span>
               <span style="font-size:15px;font-weight:600;letter-spacing:.01em">Tap for sound</span>
+            </div>
+            <!-- Buffering spinner -->
+            <div id="vslSpin" style="position:absolute;inset:0;display:none;align-items:center;justify-content:center;pointer-events:none">
+              <span style="width:46px;height:46px;border-radius:50%;border:3px solid rgba(255,255,255,.25);border-top-color:#7fd6b6;animation:vslSpin .8s linear infinite"></span>
             </div>
           </div>
         </div>
@@ -254,12 +259,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     var p = v.play && v.play();
     if (p && p.catch) p.catch(function () { /* blocked; overlay tap will start it */ });
 
+    // Buffering spinner
+    var spin = document.getElementById('vslSpin');
+    function showSpin(on){ if (spin) spin.style.display = on ? 'flex' : 'none'; }
+    v.addEventListener('waiting', function () { showSpin(true); });
+    v.addEventListener('stalled', function () { showSpin(true); });
+    v.addEventListener('playing', function () { showSpin(false); });
+    v.addEventListener('canplay', function () { showSpin(false); });
+
     function unmute(){
       v.muted = false;
       v.volume = 1;
+      v.currentTime = 0;   // restart from the beginning so they hear the hook with sound
       var pr = v.play();
       if (pr && pr.catch) pr.catch(function () {});
-      v.controls = true; // hand over play/pause/seek/volume after first interaction
+      v.controls = true;   // hand over play/pause/seek/volume after first interaction
       overlay.style.opacity = '0';
       setTimeout(function () { overlay.style.display = 'none'; }, 240);
       push('video_unmute');
