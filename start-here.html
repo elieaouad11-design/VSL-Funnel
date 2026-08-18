@@ -21,6 +21,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/css/intlTelInput.css">
 
 <style>
   *{box-sizing:border-box}
@@ -41,6 +42,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .modal{position:fixed;inset:0;background:rgba(14,17,19,.6);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px}
   .modal.open{display:flex}
   .modal input:focus{border-color:#14634f}
+
+  /* International phone input */
+  .iti{width:100%}
+  .iti__country-list{text-align:left}
 </style>
 </head>
 
@@ -194,6 +199,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <input type="text" name="first_name" placeholder="First name" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
         <input type="email" name="email" placeholder="Email address" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
         <input type="tel" name="phone" placeholder="Phone number" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
+        <div id="phoneErr" style="display:none;margin:-4px 2px 0;font-size:12.5px;color:#c0392b">Please enter a valid phone number.</div>
         <input type="text" name="instagram" placeholder="Instagram handle" required style="height:50px;border:1px solid #e4e2dc;background:#faf9f7;border-radius:14px;padding:0 16px;font-size:16px;font-family:inherit;box-sizing:border-box;outline:none">
         <button type="submit" class="cta-green" style="height:56px;border:none;border-radius:999px;background:#14634f;color:#fff;font-family:inherit;font-size:17px;font-weight:600;cursor:pointer;margin-top:6px">Continue →</button>
       </form>
@@ -201,6 +207,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
 </div>
+
+<!-- International phone input (auto country detection) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/intlTelInput.min.js"></script>
 
 <script>
   // ---- Testimonials (from the design's `stories` array) ----
@@ -291,16 +300,52 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     v.addEventListener('ended', function () { push('video_complete'); });
   })();
 
+  // ---- International phone input: auto country by IP, or from the typed/pasted number ----
+  var __iti = null;
+  function showPhoneError(on){ var el = document.getElementById('phoneErr'); if (el) el.style.display = on ? 'block' : 'none'; }
+  (function(){
+    var input = document.querySelector('#bookingModal input[name="phone"]');
+    if (!input || !window.intlTelInput) return;
+    __iti = window.intlTelInput(input, {
+      initialCountry: 'auto',
+      separateDialCode: true,
+      dropdownContainer: document.body, // so the country list isn't clipped by the modal
+      geoIpLookup: function(cb){
+        fetch('https://get.geojs.io/v1/ip/country.json')
+          .then(function(r){ return r.json(); })
+          .then(function(d){ cb(d && d.country ? d.country : 'lb'); })
+          .catch(function(){ cb('lb'); }); // default to Lebanon if the lookup fails
+      },
+      utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/utils.min.js'
+    });
+    input.addEventListener('input', function(){ showPhoneError(false); });
+  })();
+
   // ---- Opt-in submit: send to agenci.io CRM + carry details to the survey ----
   var WEBHOOK = 'https://services.leadconnectorhq.com/hooks/TCTH9Tc3gblq3h6sQHkA/webhook-trigger/02aacf8d-dd1a-4c22-a3ff-de1d418b8a06';
 
   function submitOptin(e){
     e.preventDefault();
     var f = e.target;
+    // Build the full international phone (E.164, e.g. +9613123456) with the detected country code.
+    var phone = f.phone.value.trim();
+    if (__iti) {
+      if (window.intlTelInputUtils && typeof __iti.isValidNumber === 'function' && phone && !__iti.isValidNumber()) {
+        showPhoneError(true); f.phone.focus(); return false;
+      }
+      var full = (__iti.getNumber && __iti.getNumber()) || '';
+      if (!full) { // fallback if the utils script hasn't loaded yet (slow connection)
+        var cd = __iti.getSelectedCountryData && __iti.getSelectedCountryData();
+        var natl = f.phone.value.replace(/[^\d]/g, '');
+        if (cd && cd.dialCode && natl) full = '+' + cd.dialCode + natl;
+      }
+      if (full) phone = full;
+    }
+    showPhoneError(false);
     var data = {
       first_name: f.first_name.value.trim(),
       email: f.email.value.trim(),
-      phone: f.phone.value.trim(),
+      phone: phone,
       instagram: f.instagram.value.trim()
     };
     // Carry details to the survey step via same-origin storage — keeps the
