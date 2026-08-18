@@ -308,7 +308,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (!input || !window.intlTelInput) return;
     __iti = window.intlTelInput(input, {
       initialCountry: 'auto',
-      separateDialCode: true,
       dropdownContainer: document.body, // so the country list isn't clipped by the modal
       geoIpLookup: function(cb){
         fetch('https://get.geojs.io/v1/ip/country.json')
