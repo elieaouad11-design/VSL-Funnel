@@ -63,7 +63,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- Survey embed -->
   <section style="padding:16px">
     <div style="max-width:1140px;margin:0 auto;background:#fff;border-radius:34px;padding:clamp(16px,3vw,28px)">
-      <div id="survey-embed"></div>
+      <!-- agenci.io (GoHighLevel) survey — official static embed -->
+      <iframe src="https://app.elieaouad.com/widget/survey/6GpJXKQR5o8pYMzwfxq9" style="border:none;width:100%;" scrolling="no" id="6GpJXKQR5o8pYMzwfxq9" title="survey"></iframe>
+      <script>
+        // Prefill from the opt-in popup (sticky contact) — set the params on the
+        // static iframe BEFORE form_embed.js runs, so the embed still initializes
+        // normally. Only runs if a lead came through the popup; otherwise the
+        // iframe keeps its plain src. Field names must match the survey's query
+        // keys in agenci (standard: first_name/email/phone; Instagram custom
+        // field needs its query key set to "instagram").
+        (function () {
+          try {
+            var lead = JSON.parse(sessionStorage.getItem('eac_lead') || '{}');
+            var q = [];
+            ['first_name', 'email', 'phone', 'instagram'].forEach(function (k) {
+              if (lead[k]) q.push(k + '=' + encodeURIComponent(lead[k]));
+            });
+            if (q.length) {
+              var ifr = document.getElementById('6GpJXKQR5o8pYMzwfxq9');
+              ifr.src = ifr.src.split('?')[0] + '?' + q.join('&');
+            }
+          } catch (e) {}
+        })();
+      </script>
+      <script src="https://app.elieaouad.com/js/form_embed.js"></script>
     </div>
   </section>
 
@@ -77,40 +100,5 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </footer>
 
 </div>
-
-<script>
-  // Pull the details captured in the opt-in popup (same-origin storage) and
-  // pass them to the agenci.io survey as prefill params, so the visitor
-  // doesn't fill their name/email/phone/Instagram twice (sticky contact).
-  //
-  // NOTE: the param names below must match each field's "query key" in agenci.
-  // Standard contact fields use first_name / email / phone; the Instagram
-  // custom field must have its query key set to "instagram" in agenci for it
-  // to prefill. Adjust here if your field keys differ.
-  (function () {
-    var lead = {};
-    try { lead = JSON.parse(sessionStorage.getItem('eac_lead') || '{}'); } catch (_) {}
-
-    var base = 'https://app.elieaouad.com/widget/survey/6GpJXKQR5o8pYMzwfxq9';
-    var qs = new URLSearchParams();
-    if (lead.first_name) qs.set('first_name', lead.first_name);
-    if (lead.email)      qs.set('email', lead.email);
-    if (lead.phone)      qs.set('phone', lead.phone);
-    if (lead.instagram)  qs.set('instagram', lead.instagram);
-    var src = base + (qs.toString() ? ('?' + qs.toString()) : '');
-
-    var ifr = document.createElement('iframe');
-    ifr.src = src;
-    ifr.id = '6GpJXKQR5o8pYMzwfxq9';
-    ifr.title = 'survey';
-    ifr.scrolling = 'no';
-    ifr.setAttribute('style', 'border:none;width:100%;');
-    document.getElementById('survey-embed').appendChild(ifr);
-
-    var s = document.createElement('script');
-    s.src = 'https://app.elieaouad.com/js/form_embed.js';
-    document.body.appendChild(s);
-  })();
-</script>
 </body>
 </html>
